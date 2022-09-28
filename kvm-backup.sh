@@ -29,7 +29,7 @@ backup_domain() {
     #
     DISKSPEC=""
     for t in $TARGETS; do
-        DISKSPEC="$DISKSPEC --diskspec $t,snapshot=external"
+        DISKSPEC="$DISKSPEC --diskspec $t,file='${DOMAIN}-auto.backup',snapshot=external"
     done
     virsh snapshot-create-as --domain "$DOMAIN" --name backup --no-metadata \
         --atomic --disk-only $DISKSPEC >/dev/null
