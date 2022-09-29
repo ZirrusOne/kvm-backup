@@ -21,8 +21,8 @@ backup_domain() {
     #
     # Get the list of targets (disks) and the image paths.
     #
-    TARGETS=`virsh domblklist "$DOMAIN" --details | grep ^file | awk '{print $3}'`
-    IMAGES=`virsh domblklist "$DOMAIN" --details | grep ^file | awk '{print $4}'`
+    TARGETS=`virsh domblklist "$DOMAIN" --details | grep ^\ file | awk '{print $3}'`
+    IMAGES=`virsh domblklist "$DOMAIN" --details | grep ^\ file | awk '{print $4}'`
 
     #
     # Create the snapshot.
@@ -49,7 +49,7 @@ backup_domain() {
     #
     # Merge changes back.
     #
-    BACKUPIMAGES=`virsh domblklist "$DOMAIN" --details | grep ^file | awk '{print $4}'`
+    BACKUPIMAGES=`virsh domblklist "$DOMAIN" --details | grep ^\ file | awk '{print $4}'`
     for t in $TARGETS; do
         virsh blockcommit "$DOMAIN" "$t" --active --pivot >/dev/null
         if [ $? -ne 0 ]; then
